@@ -1,32 +1,32 @@
 name: Clock Out
 on:
-# set cron around 17.03 (UTC+7) // sometimes cron will execute at 17.50, so be carefull to set the schedule
-# * * * * * perintah yang akan dieksekusi
-# – – – – –
-# | | | | |
-# | | | | +—– day of week (0 – 7) (Sunday=0)
-# | | | +——- month (1 – 12)
-# | | +——— day of month (1 – 31)
-# | +———– hour (0 – 23)
-# +————- min (0 – 59)
-  schedule:
-    - cron: "3 10 * * *"
+  # set cron around 17.03 (UTC+7) // sometimes cron will execute at 17.50, so be carefull to set the schedule
+  # * * * * * perintah yang akan dieksekusi
+  # – – – – –
+  # | | | | |
+  # | | | | +—– day of week (0 – 7) (Sunday=0)
+  # | | | +——- month (1 – 12)
+  # | | +——— day of month (1 – 31)
+  # | +———– hour (0 – 23)
+  # +————- min (0 – 59)
+  # schedule:
+  #   - cron: "3 10 * * *"
   workflow_dispatch: {}
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: nanasess/setup-chromedriver@v1
-      with:
-        chromedriver-version: "106.0.5249.61"
-    - uses: actions/setup-go@v3
-      with:
-        go-version: 1.19.1
-    - run: go run . clock-out
-      env:
-        TZ: Asia/Jakarta
-        TALENTA_EMAIL: ${{ secrets.TALENTA_EMAIL }}
-        TALENTA_PASSWORD: ${{ secrets.TALENTA_PASSWORD }}
-        LATITUDE: ${{ secrets.LATITUDE }}
-        LONGITUDE: ${{ secrets.LONGITUDE }}
+      - uses: actions/checkout@v3
+      - uses: nanasess/setup-chromedriver@v1
+        with:
+          chromedriver-version: "106.0.5249.61"
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.19.1
+      - run: go run . clock-out
+        env:
+          TZ: Asia/Jakarta
+          TALENTA_EMAIL: ${{ secrets.TALENTA_EMAIL }}
+          TALENTA_PASSWORD: ${{ secrets.TALENTA_PASSWORD }}
+          LATITUDE: ${{ secrets.LATITUDE }}
+          LONGITUDE: ${{ secrets.LONGITUDE }}
